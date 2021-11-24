@@ -196,14 +196,6 @@ static void render_luna(int LUNA_X, int LUNA_Y) {
         anim_timer = timer_read32();
         animate_luna();
     }
-
-    /* this fixes the screen on and off bug */
-    if (current_wpm > 0) {
-        oled_on();
-        anim_sleep = timer_read32();
-    } else if (timer_elapsed32(anim_sleep) > OLED_TIMEOUT) {
-        oled_off();
-    }
 }
 
 /* KEYBOARD PET END */
@@ -212,7 +204,7 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
   if (!is_keyboard_master()) {
     return OLED_ROTATION_180;  // flips the display 180 degrees if offhand
   }
-  return rotation;
+  return OLED_ROTATION_270;
 }
 
 #define L_BASE 0
@@ -221,10 +213,11 @@ oled_rotation_t oled_init_user(oled_rotation_t rotation) {
 #define L_ADJUST 8
 
 void oled_render_layer_state(void) {
-    oled_write_P(PSTR("Layer: "), false);
+    oled_write_P(PSTR("Layer"), false);
+    oled_write_P(PSTR("-----"), false);
     switch (layer_state) {
         case L_BASE:
-            oled_write_ln_P(PSTR("Default"), false);
+            oled_write_ln_P(PSTR("DFLT"), false);
             break;
         case L_LOWER:
             oled_write_ln_P(PSTR("Lower"), false);
@@ -301,9 +294,9 @@ void oled_task_user(void) {
     if (is_keyboard_master()) {
         oled_render_layer_state();
         oled_render_keylog();
+        render_luna(0, 13);
     } else {
         oled_render_logo();
-        render_luna(0, 13);
     }
 }
 
