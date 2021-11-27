@@ -30,13 +30,22 @@ along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 #define USE_SERIAL_PD2
 
+#define NO_ACTION_ONESHOT
+#define IGNORE_MOD_TAP_INTERRUPT
 #define TAPPING_FORCE_HOLD
 #define TAPPING_TERM 200
 
+#define MOUSEKEY_INTERVAL 16
+#define MOUSEKEY_DELAY 0
+#define MOUSEKEY_TIME_TO_MAX 60
+#define MOUSEKEY_MAX_SPEED 7
+#define MOUSEKEY_WHEEL_DELAY 0
+
 #ifdef RGBLIGHT_ENABLE
+    #define RGBLIGHT_SLEEP
     #undef RGBLED_NUM
-    #define RGBLIGHT_ANIMATIONS
-    #define RGBLED_NUM 27
+    #define RGBLED_NUM 6
+    #define RGBLIGHT_DEFAULT_HUE 21
     #define RGBLIGHT_LIMIT_VAL 120
     #define RGBLIGHT_HUE_STEP 10
     #define RGBLIGHT_SAT_STEP 17
