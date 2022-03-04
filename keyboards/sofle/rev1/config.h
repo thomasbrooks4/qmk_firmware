@@ -36,3 +36,7 @@
 
 #define NO_ACTION_MACRO
 #define NO_ACTION_FUNCTION
+
+#define QMK_LED        B0  // Built-in LED
+#define QMK_ESC_OUTPUT F4  // usually COL
+#define QMK_ESC_INPUT  D4  // usually ROW
